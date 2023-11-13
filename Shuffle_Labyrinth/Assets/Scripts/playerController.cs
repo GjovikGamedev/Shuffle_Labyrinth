@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
+    public GameObject camera;
 
     float maxSpeed = 10f;
     float curSpeed;
@@ -26,10 +27,15 @@ public class playerController : MonoBehaviour
         // the movement magic
         rb.velocity = new Vector3(
             Mathf.Lerp(0, Input.GetAxis("Horizontal") * curSpeed, 0.8f),
-            rb.velocity.y,
+            0,
             Mathf.Lerp(0, Input.GetAxis("Vertical") * curSpeed, 0.8f)
         );
-
     }
-
+    void Update()
+    {
+        if (rb.velocity != new Vector3(0, 0, 0))
+        {
+            transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+        }
+    }
 }
