@@ -263,6 +263,7 @@ MonoBehaviour:
   - {fileID: 5501516122923995846, guid: f4a60ecf86aa69648b686863fd8131e2, type: 3}
   roomLength: 5
   moveTime: 4
+  speed: 5
   gridSize: 5
 --- !u!1 &982846927
 GameObject:

@@ -8,6 +8,9 @@ public class roomScript : MonoBehaviour
     float numSteps;
     float newX;
     float newZ;
+    float speed;
+    //float speedX;
+    //float speedZ;
 
     bool moving;
     bool edgeCase;
@@ -21,9 +24,9 @@ public class roomScript : MonoBehaviour
     {
         getGrid();
         roomLength = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
+        speed = GameObject.Find("Level").GetComponent<levelScript>().speed;
 
         moveTime = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
-        numSteps = moveTime / Time.deltaTime;
 
         moving = false;
         edgeCase = false;
@@ -51,11 +54,12 @@ public class roomScript : MonoBehaviour
             else
             {
                 transform.position += new Vector3(              //Changes the position
-                    (newX - transform.position.x) / numSteps,     //The change in x-position for each step
+                    (newX - transform.position.x),     //The change in x-position for each step
                     0,
-                    (newZ - transform.position.z) / numSteps);
+                    (newZ - transform.position.z)).normalized * speed * Time.deltaTime;
 
-                if ((newX - transform.position.x) < 0.1 && (newZ - transform.position.z) < 0.1)
+                if ( (newX - transform.position.x) < 0.01 && -0.01 < (newX - transform.position.x) &&
+                     (newZ - transform.position.z) < 0.01 && -0.01 < (newZ - transform.position.z) )
                 {
                     transform.position = new Vector3(newX, 0, newZ);
                     moving = false;

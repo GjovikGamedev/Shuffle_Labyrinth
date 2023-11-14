@@ -9,10 +9,10 @@ public class levelScript : MonoBehaviour
     public GameObject[] roomList;
     public float roomLength;
     public float moveTime;          //How many seconds the shuffling is supposed to take
+    public float speed;
 
     public GameObject[,] grid;     //A 5 by 5 grid (0-4).
-
-  public int gridSize;      //The length and height of the grid. How many squares
+    public int gridSize;      //The length and height of the grid. How many squares
     
 
     // Start is called before the first frame update
