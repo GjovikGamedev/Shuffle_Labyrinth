@@ -14,16 +14,16 @@ public class roomScript : MonoBehaviour
 
     bool moving;
     bool edgeCase;
-    bool halfWay;
-    bool positive;
-    float roomLength;
+    Vector3 edgeDirection;
+
     GameObject [,] grid;
-    float gridSize;
+    int gridSize;
+    float roomLength;
     // Start is called before the first frame update
     void Start()
     {
         getGrid();
-        roomLength = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
+        roomLength = GameObject.Find("Level").GetComponent<levelScript>().roomLength;
         speed = GameObject.Find("Level").GetComponent<levelScript>().speed;
 
         moveTime = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
@@ -80,53 +80,21 @@ public class roomScript : MonoBehaviour
     //Different function for the edge cases (when a room needs to get to the other side of the grid)
     public void Move(bool axis)        //axis describes which axis the moved row/column is on. true = x-axis
     {
-        /*newX = transform.position.x;
-        newZ = transform.position.z;
-
-        if (axis)
+        int[] pos = getRoomPosition();      //Finds its own position in the grid
+        int direction;
+        if (axis)                           //If it's the x-axis
         {
-            for (int i = 0; i < 5; i++)     //The fives here should eventually be replaced by gridSize
-            {
-                if (grid[0, i] == this)
-                {
-                    newX = roomLength * 5;
-                    positive = true;        //Goes in a positive direction
-                }
-            }
-
-            for (int i = 0; i < 5; i++)     //The fives here should eventually be replaced by gridSize
-            {
-                if (grid[5, i] == this)
-                {
-                    newX = 0;
-                    positive = false;        //Goes in a positive direction
-                }
-            }
-
+            //pos[0] == this rooms coordinate. (gridsize-1) - pos[0] == opposite rooms coordinate
+            direction = pos[0] - ( (gridSize-1) - pos[0] );       //Negative number if this room is on the left edge, and positive number if its on the right edge
+            edgeDirection = new Vector3(direction, 0, 0).normalized;   //Creates a normalized vector
         } else
         {
-            for (int i = 0; i < 5; i++)     //The fives here should eventually be replaced by gridSize
-            {
-                if (grid[i, 0] == this)
-                {
-                    newZ = roomLength * 5;
-                    positive = true;        //Goes in a positive direction
-                }
-            }
-
-            for (int i = 0; i < 5; i++)     //The fives here should eventually be replaced by gridSize
-            {
-                if (grid[i, 5] == this)
-                {
-                    newZ = 0;
-                    positive = false;        //Goes in a positive direction
-                }
-            }
+            //Same as above, except here we use the Z-coordinate
+            direction = pos[1] - ( (gridSize-1) - pos[1] );
+            edgeDirection = new Vector3(0, 0, 1).normalized;   //Finds the direction of
         }
-       
-        moving = true;
+
         edgeCase = true;
-        halfWay = false;*/
     }
     private void OnTriggerEnter(Collider other)
     {
