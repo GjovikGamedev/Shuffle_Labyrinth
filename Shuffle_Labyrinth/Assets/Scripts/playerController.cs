@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class playerController : MonoBehaviour
 
     float sprintSpeed;
     Rigidbody rb;
+
+    public bool gameIsPaused = false;
+    public GameObject menuObject;
 
     void Start()
     {
@@ -37,5 +41,36 @@ public class playerController : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
         }
+
+        //pause menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
+
+    //resume game
+    public void Resume()
+    {
+        menuObject.SetActive(false);
+        gameIsPaused = false;
+        Time.timeScale = 1f;
+
+    }
+
+    //pause game
+    public void Pause()
+    {
+        menuObject.SetActive(true);
+        gameIsPaused = true;
+        Time.timeScale = 0f;
     }
 }
+

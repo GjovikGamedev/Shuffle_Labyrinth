@@ -147,3 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
+  camera: {fileID: 0}
+  gameIsPaused: 0
+  menuObject: {fileID: 5369176443666623080, guid: 8e2e0ba0182ead54e886429932c4566e, type: 3}
