@@ -30,13 +30,10 @@ public class levelScript : MonoBehaviour
                 //Places the rooms evenly in the grid
                 grid[j, i].transform.position = new Vector3(j*roomLength, 0, i*roomLength);
 
-                Debug.Log(roomType);
                 if (++roomType >= numRooms)          //Goes to the next room in the roomList. If outside roomlist, then go to the beginning of roomlist
                 {
                     roomType = 0;
                 }
-                Debug.Log(roomType);
-                Debug.Log("-----------");
             }
         }
         //grid[0, 0] = Instantiate(roomList[0], new Vector3(0, 0, 0), Quaternion.identity);

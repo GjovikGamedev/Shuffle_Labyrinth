@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8358347519275074131}
   - component: {fileID: 1971525952823163234}
   - component: {fileID: 1585552207841112540}
+  - component: {fileID: 3647452594750531063}
   m_Layer: 0
   m_Name: Room_7
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2228417370725966487, guid: 28f757f7d0e52d44eb21a9077c12755d, type: 3}
+--- !u!114 &3647452594750531063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5501516122923995846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b972a759879674693e83e5a63f95c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
