@@ -17,6 +17,8 @@ public class playerController : MonoBehaviour
     public bool gameIsPaused = false;
     public GameObject menuObject;
 
+    public int[] currRoom;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -385,6 +385,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 96264091967946757, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 96264091967946757, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 96264091967946757, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 129
+      objectReference: {fileID: 0}
     - target: {fileID: 1292327106025687501, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
       propertyPath: m_Name
       value: StartMenu
@@ -468,6 +480,30 @@ PrefabInstance:
     - target: {fileID: 2448635974189019710, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607190501679635057, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607190501679635057, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607190501679635057, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607190501679635057, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607190501679635057, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1272
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607190501679635057, guid: cfe05bfa62a8a7a4f851c685666cd1e8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 716
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

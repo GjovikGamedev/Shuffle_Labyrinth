@@ -15,10 +15,11 @@ public class roomScript : MonoBehaviour
     bool positive;
     float roomLength;
     GameObject [,] grid;
+    float gridSize;
     // Start is called before the first frame update
     void Start()
     {
-        grid = GameObject.Find("Level").GetComponent<levelScript>().grid;
+        getGrid();
         roomLength = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
 
         moveTime = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
@@ -123,4 +124,31 @@ public class roomScript : MonoBehaviour
         edgeCase = true;
         halfWay = false;*/
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        //when player enter room, the room tell player where he is located
+        if(other.gameObject.CompareTag("Player")){
+            other.GetComponent<playerController>().currRoom = getRoomPosition();
+        }
+    }
+
+
+    public int [] getRoomPosition(){
+        getGrid();
+        for(int i = 0; i < gridSize; i++){
+            for(int j = 0; j < gridSize; j++) {
+                if(grid[i,j] == gameObject){
+                    int[] pos = {i,j};
+                    return pos;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void getGrid(){
+        grid = GameObject.Find("Level").GetComponent<levelScript>().grid;
+        gridSize = GameObject.Find("Level").GetComponent<levelScript>().gridSize;
+    }
+
 }
