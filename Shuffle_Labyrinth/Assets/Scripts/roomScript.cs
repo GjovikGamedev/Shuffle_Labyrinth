@@ -15,4 +15,16 @@ public class roomScript : MonoBehaviour
     {
         
     }
+
+    //Moves this room from it's current position to the new position described by the 
+    void Move(float newX, float newY)
+    {
+
+    }
+
+    //Different function for the edge cases (when a room needs to get to the other side of the grid)
+    void Move(bool axis)        //axis describes which axis the moved row/column is on. true = x-axis
+    {
+
+    }
 }
