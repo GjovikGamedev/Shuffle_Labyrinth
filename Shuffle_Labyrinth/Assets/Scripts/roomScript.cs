@@ -10,7 +10,6 @@ public class roomScript : MonoBehaviour
     {
         //GameObject theLevel = level;
         moveTime = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
-        Debug.Log(moveTime);
     }
 
     // Update is called once per frame
