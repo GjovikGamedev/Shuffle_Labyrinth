@@ -38,12 +38,20 @@ public class levelScript : MonoBehaviour
                 }
             }
         }
-        //grid[0, 0] = Instantiate(roomList[0], new Vector3(0, 0, 0), Quaternion.identity);
+
+        //yield return new WaitForSeconds(.3f); 
+
+        //grid[0, 0].GetComponent<roomScript>().Move(1*roomLength, 0);
+        //grid[4, 0].GetComponent<roomScript>().Move(5 * roomLength, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            grid[0, 0].GetComponent<roomScript>().Move(1 * roomLength, 0);
+            grid[4, 0].GetComponent<roomScript>().Move(5 * roomLength, 0);
+        }
     }
 }
