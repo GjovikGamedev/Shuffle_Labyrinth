@@ -188,7 +188,7 @@ MonoBehaviour:
   - {fileID: 155363582689864949, guid: e4d82eabe88a2984cb9ce6a41b09f842, type: 3}
   - {fileID: 6915347259933449963, guid: 08960b2ea96f2b248994e895c519d086, type: 3}
   - {fileID: 5501516122923995846, guid: f4a60ecf86aa69648b686863fd8131e2, type: 3}
-  roomLength: 0
+  roomLength: 5
   gridSize: 5
 --- !u!1 &982846927
 GameObject:
