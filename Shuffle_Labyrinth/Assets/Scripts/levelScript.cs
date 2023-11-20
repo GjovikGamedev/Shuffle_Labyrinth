@@ -50,8 +50,12 @@ public class levelScript : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            grid[0, 0].GetComponent<roomScript>().Move(1 * roomLength, 0);
-            grid[4, 0].GetComponent<roomScript>().Move(5 * roomLength, 0);
+            grid[0, 0].GetComponent<roomScript>().Move(false);
+            //grid[4, 0].GetComponent<roomScript>().Move(true);
+            //grid[0, 4].GetComponent<roomScript>().Move(false);
+            //grid[4, 4].GetComponent<roomScript>().Move(true);
+
+            //grid[3, 1].GetComponent<roomScript>().Move(roomLength*3, roomLength*2);
         }
     }
 }
