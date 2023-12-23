@@ -105,9 +105,6 @@ public class roomScript : MonoBehaviour
 
         pos[0] = x;
         pos[1] = z;
-
-        Debug.Log(pos[0]);
-        Debug.Log(pos[1]);
     }
 
     private void OnTriggerEnter(Collider other)

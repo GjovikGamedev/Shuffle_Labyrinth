@@ -30,7 +30,7 @@ public class levelScript : MonoBehaviour
                 grid[j, i].transform.Rotate(-90, 0, 0);         //Rotates the rooms to fit in with the top-down perspective. The prefabs are actually already rotated, but for some reason it doesn't apply to these instantiated ones
                 grid[j, i].transform.position = new Vector3(j*roomLength, 0, i*roomLength); //Places the rooms evenly in the grid
 
-                grid[j, i].GetComponent<roomScript>().SetPosition(2, 1);
+                grid[j, i].GetComponent<roomScript>().SetPosition(j, i);
 
                 if (++roomType >= numRooms)          //Goes to the next room in the roomList. If outside roomlist, then go to the beginning of roomlist
                 {                   
@@ -51,7 +51,7 @@ public class levelScript : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             //grid[2, 1].GetComponent<roomScript>().SetPosition(2,1);
-            grid[2, 1].GetComponent<roomScript>().Move(new Vector3(1, 0, 0), false);
+            grid[2, 1].GetComponent<roomScript>().Move(new Vector3(0, 0, -1), false);
         }
     }
 }
