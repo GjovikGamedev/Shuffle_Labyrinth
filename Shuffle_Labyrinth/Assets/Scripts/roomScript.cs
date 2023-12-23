@@ -17,7 +17,7 @@ public class roomScript : MonoBehaviour
     GameObject [,] grid;
 
     int gridSize;       //The gridsize of the current level     | These two variables are
-    int [] pos;         //This rooms position in this level     | set when spawned (instantiated)
+    int[] pos;         //This rooms position in this level     | set when spawned (instantiated)
 
 
     // Start is called before the first frame update
@@ -29,13 +29,6 @@ public class roomScript : MonoBehaviour
 
         moving = false;
         edgeCase = false;
-    }
-
-    //Sets the position in the grid
-    public void setPosition(int x, int z)
-    {
-        pos[0] = x; 
-        pos[1] = z;
     }
 
     // Update is called once per frame
@@ -103,6 +96,18 @@ public class roomScript : MonoBehaviour
             newX = transform.position.x + mDirection.x*roomLength;  // The new x and z positions are the original positions +
             newZ = transform.position.z + mDirection.z*roomLength;  // one roomLength in the moveDirection
         }
+    }
+
+    //Sets the position in the grid
+    public void SetPosition(int x, int z)
+    {
+        pos = new int[2];
+
+        pos[0] = x;
+        pos[1] = z;
+
+        Debug.Log(pos[0]);
+        Debug.Log(pos[1]);
     }
 
     private void OnTriggerEnter(Collider other)
