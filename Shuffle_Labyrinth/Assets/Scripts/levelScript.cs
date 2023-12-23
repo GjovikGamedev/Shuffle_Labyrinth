@@ -28,11 +28,11 @@ public class levelScript : MonoBehaviour
                 grid[j, i] = Instantiate(roomList[roomType], new Vector3(0, 0, 0), Quaternion.identity);
 
                 grid[j, i].transform.Rotate(-90, 0, 0);         //Rotates the rooms to fit in with the top-down perspective. The prefabs are actually already rotated, but for some reason it doesn't apply to these instantiated ones
-                //Places the rooms evenly in the grid
-                grid[j, i].transform.position = new Vector3(j*roomLength, 0, i*roomLength);
+                grid[j, i].transform.position = new Vector3(j*roomLength, 0, i*roomLength); //Places the rooms evenly in the grid
+                grid[j, i].GetComponent<roomScript>().setPosition(j, i);//
 
                 if (++roomType >= numRooms)          //Goes to the next room in the roomList. If outside roomlist, then go to the beginning of roomlist
-                {
+                {                   
                     roomType = 0;
                 }
             }
@@ -49,12 +49,7 @@ public class levelScript : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            grid[0, 0].GetComponent<roomScript>().Move(false);
-            //grid[4, 0].GetComponent<roomScript>().Move(true);
-            //grid[0, 4].GetComponent<roomScript>().Move(false);
-            //grid[4, 4].GetComponent<roomScript>().Move(true);
-
-            //grid[3, 1].GetComponent<roomScript>().Move(roomLength*3, roomLength*2);
+            //grid[0, 0].GetComponent<roomScript>().Move(1*roomLength, 0);
         }
     }
 }

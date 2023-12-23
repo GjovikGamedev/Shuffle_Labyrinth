@@ -17,8 +17,8 @@ public class roomScript : MonoBehaviour
     GameObject [,] grid;
 
     int gridSize;       //The gridsize of the current level     | These two variables are
-    int [] pos;         //This rooms position in this level     | set when instantiated (spawned)
-    
+    int [] pos;         //This rooms position in this level     | set when spawned (instantiated)
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,13 @@ public class roomScript : MonoBehaviour
 
         moving = false;
         edgeCase = false;
+    }
+
+    //Sets the position in the grid
+    public void setPosition(int x, int z)
+    {
+        pos[0] = x; 
+        pos[1] = z;
     }
 
     // Update is called once per frame
@@ -102,7 +109,8 @@ public class roomScript : MonoBehaviour
     {
         //when player enter room, the room tell player where he is located
         if(other.gameObject.CompareTag("Player")){
-            other.GetComponent<playerController>().currRoom = getRoomPosition();
+            //other.GetComponent<playerController>().currRoom = getRoomPosition();
+            other.GetComponent<playerController>().currRoom = pos;
         }
     }
 
