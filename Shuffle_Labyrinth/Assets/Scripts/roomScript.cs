@@ -6,29 +6,26 @@ using UnityEngine.UIElements;
 
 public class roomScript : MonoBehaviour
 {
-    float moveTime;
-    float numSteps;
-    float newX;
-    float newZ;
-    float speed;
-    //float speedX;
-    //float speedZ;
+    float speed;        //The speed of which the rooms move
+    float newX, newZ;   //The new position for when the room moves
+    float roomLength;   //The length of one room
 
-    bool moving;
-    bool edgeCase;
-    Vector3 edgeDirection;
+    bool moving;            //Whether or not the room is currently moving
+    bool edgeCase;          //Whether or not the room is an edge case
+    Vector3 mDirection;     //MoveDirection. The direction the room has to move when the player shifts it
 
     GameObject [,] grid;
-    int gridSize;
-    float roomLength;
+
+    int gridSize;       //The gridsize of the current level     | These two variables are
+    int [] pos;         //This rooms position in this level     | set when instantiated (spawned)
+    
+
     // Start is called before the first frame update
     void Start()
     {
         getGrid();
         roomLength = GameObject.Find("Level").GetComponent<levelScript>().roomLength;
         speed = GameObject.Find("Level").GetComponent<levelScript>().speed;
-
-        moveTime = GameObject.Find("Level").GetComponent<levelScript>().moveTime;
 
         moving = false;
         edgeCase = false;
@@ -40,10 +37,9 @@ public class roomScript : MonoBehaviour
 
         if (moving)
         {
-            ShiftRoom(edgeCase);
-            /*if (edgeCase)
+            if (edgeCase)
             {
-                //Debug.Log("Yahoo");
+                /*//Debug.Log("Yahoo");
                 transform.position += edgeDirection * speed * Time.deltaTime;   //Changes the position using edgeDirection
 
                 if (edgeDirection.x > 0)        //If it's moving in a positive x-direction
@@ -62,15 +58,12 @@ public class roomScript : MonoBehaviour
                     transform.position = new Vector3(newX, 0, newZ);
                     moving = false;
                     edgeCase = false;
-                }
+                }*/
 
             }
             else
             {
-                transform.position += new Vector3(              //Changes the position
-                    (newX - transform.position.x),     //The change in x-position for each step
-                    0,
-                    (newZ - transform.position.z)).normalized * speed * Time.deltaTime;
+                transform.position += mDirection.normalized * speed * Time.deltaTime;
 
                 if ( Mathf.Abs(newX - transform.position.x) < 0.01 &&   //The current position is within
                      Mathf.Abs(newZ - transform.position.z) < 0.01 )    //0.01 of the new position
@@ -78,41 +71,33 @@ public class roomScript : MonoBehaviour
                     transform.position = new Vector3(newX, 0, newZ);
                     moving = false;
                 }
-            }*/
+            }
         }
 
     }
 
-    //Moves this room from it's current position to the new position described by the arguments
-    public void Move(float veryNewX, float veryNewZ)
+    /**
+     * Moves this room from it's current position to the new position described by the arguments
+     * 
+     * @param edgeDirection. The direction that the room will be moving
+     * @param edgeCase. Whether or not it is an edgeCase (a room at the outer edge of a room/column)
+     */
+    public void Move(Vector3 direction, bool eCase)
     {
-        newX = veryNewX;
-        newZ = veryNewZ;
+        mDirection = direction;
+        edgeCase = eCase;
         moving = true;
-    }
 
-    //Different function for the edge cases (when a room needs to get to the other side of the grid)
-    public void Move(bool axis)        //axis describes which axis the moved row/column is on. true = x-axis
-    {
-        int[] pos = getRoomPosition();      //Finds its own position in the grid
-        int direction;
-        if (axis)                           //If it's the x-axis
+        if (edgeCase)
         {
-            //pos[0] == this rooms coordinate. (gridsize-1) - pos[0] == opposite rooms coordinate
-            direction = pos[0] - ( (gridSize-1) - pos[0] );       //Negative number if this room is on the left edge, and positive number if its on the right edge
-            edgeDirection = new Vector3(direction, 0, 0).normalized;   //Creates a normalized vector that describes which direction it needs to move
-            //Debug.Log(edgeDirection);
+
         } else
         {
-            //Same as above, except here we use the Z-coordinate
-            direction = pos[1] - ( (gridSize-1) - pos[1] );
-            edgeDirection = new Vector3(0, 0, direction).normalized;   
+            newX = transform.position.x + mDirection.x*roomLength;  // The new x and z positions are the original positions +
+            newZ = transform.position.z + mDirection.z*roomLength;  // one roomLength in the moveDirection
         }
-
-        edgeCase = true;
-        moving = true;
-        //Debug.Log(edgeCase);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         //when player enter room, the room tell player where he is located
@@ -140,7 +125,7 @@ public class roomScript : MonoBehaviour
         gridSize = GameObject.Find("Level").GetComponent<levelScript>().gridSize;
     }
 
-    private void ShiftRoom(bool edgeCase)
+    /*private void ShiftRoom(bool edgeCase)
     {
         if (edgeCase)
         {
@@ -204,6 +189,6 @@ public class roomScript : MonoBehaviour
             moving = false;
             edgeCase = false;
         }
-    }
+    }*/
 
 }

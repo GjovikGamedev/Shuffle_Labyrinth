@@ -17,7 +17,7 @@ public class playerController : MonoBehaviour
     public bool gameIsPaused = false;
     public GameObject menuObject;
 
-    public int[] currRoom;
+    public int[] currRoom;      //Position of the room the player is currently in
 
     void Start()
     {

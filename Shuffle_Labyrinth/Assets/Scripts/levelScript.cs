@@ -8,7 +8,6 @@ public class levelScript : MonoBehaviour
 {
     public GameObject[] roomList;
     public float roomLength;
-    public float moveTime;          //How many seconds the shuffling is supposed to take
     public float speed;
 
     public GameObject[,] grid;     //A 5 by 5 grid (0-4).
