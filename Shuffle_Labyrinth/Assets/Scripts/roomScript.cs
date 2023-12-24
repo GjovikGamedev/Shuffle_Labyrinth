@@ -31,6 +31,15 @@ public class roomScript : MonoBehaviour
         edgeCase = false;
     }
 
+    //Sets the position in the grid
+    public void SetPosition(int x, int z)
+    {
+        pos = new int[2];
+
+        pos[0] = x;
+        pos[1] = z;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -39,10 +48,18 @@ public class roomScript : MonoBehaviour
         {
             if (edgeCase)
             {
-                /*//Debug.Log("Yahoo");
-                transform.position += edgeDirection * speed * Time.deltaTime;   //Changes the position using edgeDirection
+                transform.position += mDirection * speed * Time.deltaTime;   //Changes the position using edgeDirection
 
-                if (edgeDirection.x > 0)        //If it's moving in a positive x-direction
+                //If the current relevant position is half a roomlength farther away from the new position than it's start position
+                //Note: The relevant position is wichever axis the room is moving on
+                if (Mathf.Abs( (newX + mDirection.x * roomLength * (gridSize - 0.5f) ) - transform.position.x) < 0.01 &&
+                    Mathf.Abs( (newZ + mDirection.z * roomLength * (gridSize - 0.5f) ) - transform.position.z) < 0.01)
+                {
+                    //Puts the room half a roomLength away from its destination
+                    transform.position = new Vector3(newX - mDirection.x * roomLength/2, 0, newZ - mDirection.z * roomLength/2);
+                }
+
+                /*if (edgeDirection.x > 0)        //If it's moving in a positive x-direction
                 {
                     //If the current x-position is half a roomlength farther away than it's startposition
                     if ( Mathf.Abs( (newX + (gridSize-0.5f)*roomLength) - transform.position.x) < 0.01)  
@@ -50,20 +67,20 @@ public class roomScript : MonoBehaviour
                         Debug.Log("Yahoo");
                         transform.position = new Vector3(newX-roomLength, 0, transform.position.z);
                     }
-                }
+                }*/
 
                 if (Mathf.Abs(newX - transform.position.x) < 0.01 &&   //The current position is within
-                        Mathf.Abs(newZ - transform.position.z) < 0.01)     //0.01 of the new position
+                    Mathf.Abs(newZ - transform.position.z) < 0.01)     //0.01 of the new position
                 {
                     transform.position = new Vector3(newX, 0, newZ);
                     moving = false;
                     edgeCase = false;
-                }*/
+                }
 
             }
             else
             {
-                transform.position += mDirection.normalized * speed * Time.deltaTime;
+                transform.position += mDirection * speed * Time.deltaTime;
 
                 if ( Mathf.Abs(newX - transform.position.x) < 0.01 &&   //The current position is within
                      Mathf.Abs(newZ - transform.position.z) < 0.01 )    //0.01 of the new position
@@ -79,7 +96,7 @@ public class roomScript : MonoBehaviour
     /**
      * Moves this room from it's current position to the new position described by the arguments
      * 
-     * @param edgeDirection. The direction that the room will be moving
+     * @param edgeDirection. The direction that the room will be moving. Normalized.
      * @param edgeCase. Whether or not it is an edgeCase (a room at the outer edge of a room/column)
      */
     public void Move(Vector3 direction, bool eCase)
@@ -90,21 +107,13 @@ public class roomScript : MonoBehaviour
 
         if (edgeCase)
         {
-
+            newX = transform.position.x - mDirection.x * roomLength * (gridSize-1); //The opposite side of the grid is the same
+            newZ = transform.position.z - mDirection.z * roomLength * (gridSize-1); //as current position - the width of the grid 
         } else
         {
-            newX = transform.position.x + mDirection.x*roomLength;  // The new x and z positions are the original positions +
-            newZ = transform.position.z + mDirection.z*roomLength;  // one roomLength in the moveDirection
+            newX = transform.position.x + mDirection.x * roomLength;  // The new x and z positions are the original positions +
+            newZ = transform.position.z + mDirection.z * roomLength;  // one roomLength in the moveDirection
         }
-    }
-
-    //Sets the position in the grid
-    public void SetPosition(int x, int z)
-    {
-        pos = new int[2];
-
-        pos[0] = x;
-        pos[1] = z;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -52,6 +52,10 @@ public class levelScript : MonoBehaviour
         {
             //grid[2, 1].GetComponent<roomScript>().SetPosition(2,1);
             grid[2, 1].GetComponent<roomScript>().Move(new Vector3(0, 0, -1), false);
+            grid[4, 1].GetComponent<roomScript>().Move(new Vector3(1, 0, 0), true);
+            grid[0, 4].GetComponent<roomScript>().Move(new Vector3(-1, 0, 0), true);
+            grid[1, 4].GetComponent<roomScript>().Move(new Vector3(0, 0, 1), true);
+            grid[3, 0].GetComponent<roomScript>().Move(new Vector3(0, 0, -1), true);
         }
     }
 }
