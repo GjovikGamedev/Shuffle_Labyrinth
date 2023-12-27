@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;    Messes up with some quaternion stuff I did, since both this and unityEngine 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,10 +23,14 @@ public class playerController : MonoBehaviour
 
     public int[] currRoom;      //Position of the room the player is currently in
 
+    GameObject[,] grid;         //The grid of the current level
+    int gridSize;               //The gridsize of the current level
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         // sprintSpeed = walkSpeed + (walkSpeed / 2);
+        facing = 3;     //Starts off with facing up
     }
 
     void FixedUpdate()
@@ -86,11 +91,14 @@ public class playerController : MonoBehaviour
             }
         }
 
-        /*
-        if ()
+        //Reads the room shifting inputs
+        if (Input.GetKeyDown(KeyCode.K))    //Leftshifting
         {
-
-        }*/
+            roomShift(-1);
+        } else if (Input.GetKeyDown(KeyCode.L))     //Rightshifting
+        {
+            roomShift(1);
+        }
 
         //Some testing
         if (Input.GetKeyDown(KeyCode.Space))
@@ -99,8 +107,14 @@ public class playerController : MonoBehaviour
         }
     }
 
-    //resume game
-    public void Resume()
+    private void getGrid()
+    {
+        grid = GameObject.Find("Level").GetComponent<levelScript>().grid;
+        gridSize = GameObject.Find("Level").GetComponent<levelScript>().gridSize;   //Only actually needs to get the gridSize when the level changes
+    }
+
+        //resume game
+        public void Resume()
     {
         menuObject.SetActive(false);
         gameIsPaused = false;
@@ -114,6 +128,52 @@ public class playerController : MonoBehaviour
         menuObject.SetActive(true);
         gameIsPaused = true;
         Time.timeScale = 0f;
+    }
+
+    /**
+     * Finds all the relevant rooms and shifts them, if possible.
+     * 
+     * @param leftRight. Which direction you shifted
+     */
+    private void roomShift(int leftRight)
+    {
+        getGrid();
+        float roomX;        //The x-position of the room we're shifting
+        float roomZ = currRoom[1];        //The z-position of the room we're shifting
+
+        //Changes the mDirection to the direction of where you are facing
+        switch (facing)
+        {
+            case 1:
+                mDirection = new Vector3(1, 0, 0);
+                break;
+            case 2:
+                mDirection = new Vector3(-1, 0, 0);
+                break;
+            case 3:
+                mDirection = new Vector3(0, 0, 1);
+                break;
+            case 4:
+                mDirection = new Vector3(0, 0, -1);
+                break;
+        }
+
+        roomX = currRoom[0] + mDirection.x;
+        roomZ = currRoom[1] + mDirection.z;
+        Debug.Log("x = " + roomX);
+        Debug.Log("z = " + roomZ);
+        Debug.Log("------------------");
+
+        if (roomX >= 0 && roomX < gridSize &&       //The room position is within the bounds of the grid
+            roomZ >= 0 && roomZ < gridSize)
+        {
+            mDirection = Quaternion.Euler(0, 90*leftRight, 0) * mDirection;     //Rotates mDirection along the y-axis. Don't ask how
+            Debug.Log(mDirection);
+
+        } else
+        {
+            Debug.Log("Ikke ett rom foran deg der");
+        }
     }
 }
 
